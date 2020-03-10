@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/index.css') }}">
+    <meta charset="UTF-8">
+    <title>Live scores</title>
+</head>
+<body>
+	<div class="flex-grid">
+		{% for game in games %}
+		<div class="game">
+			<div class="top-game">
+				<div class="team">
+					<p class="game-info">{{game.away_team}}</p>
+					<p class="game-info">{{game.home_team}}</p>
+				</div>
+				<div class="spread">
+					<p class="game-info">{{game.away_spread}}</p>
+					<p class="game-info">{{game.home_spread}}</p>
+				</div>
+				<div class="score">
+					{% if game.away_score != 0 or game.home_score != 0 %}
+						<p class="game-info">{{game.away_score}}</p>
+						<p class="game-info">{{game.home_score}}</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="bottom-game">
+				<p class="game-info">{{game.time}}</p>
+				<a class= "game-info" id="game-info-link" href="{{ '/game/{}'.format(game.id) }}">Game Info</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</body>
+</html>
